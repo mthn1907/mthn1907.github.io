@@ -4,74 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Theory Functions</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
-        }
-        .navbar a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-        .content {
-            padding: 20px;
-        }
-        h2 {
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-        }
-        section {
-            margin-bottom: 40px;
-        }
-    </style>
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <script src="https://peterolson.github.io/BigInteger.js/BigInteger.min.js"></script>
 </head>
 <body>
 
-<div class="navbar">
-    <a href="#primality-tests">Primality Tests</a>
-    <a href="#prime-factorization">Prime Factorization</a>
-    <a href="#quadratic-residue">Quadratic Residue</a>
-</div>
-
 <div class="content">
-    <section id="primality-tests">
-        <h2>Primality Tests</h2>
-        <h3>Subtopic 1</h3>
-        <p>Content for Primality Tests - Subtopic 1.</p>
-        <h3>Subtopic 2</h3>
-        <p>Content for Primality Tests - Subtopic 2.</p>
-    </section>
+    <h1 style="font-family: math; text-align: center;">A Number Theory Site</h1>
 
-    <section id="prime-factorization">
-        <h2>Prime Factorization</h2>
-        <h3>Subtopic 1</h3>
-        <p>Content for Prime Factorization - Subtopic 1.</p>
-        <h3>Subtopic 2</h3>
-        <p>Content for Prime Factorization - Subtopic 2.</p>
-    </section>
-
-    <section id="quadratic-residue">
-        <h2>Quadratic Residue</h2>
-        <h3>Subtopic 1</h3>
-        <p>Content for Quadratic Residue - Subtopic 1.</p>
-        <h3>Subtopic 2</h3>
-        <p>Content for Quadratic Residue - Subtopic 2.</p>
-    </section>
+    <tab-container>
+        <!-- TAB CONTROLS -->
+        <input type="radio" id="tabToggle01" name="tabs" value="1" checked />
+        <label for="tabToggle01" checked="checked">Primality Test</label>
+        <input type="radio" id="tabToggle02" name="tabs" value="2" />
+        <label for="tabToggle02">Find Next Prime</label>
+        <input type="radio" id="tabToggle03" name="tabs" value="3" />
+        <label for="tabToggle03">Prime Counting</label>
+        <input type="radio" id="tabToggle04" name="tabs" value="4" />
+        <label for="tabToggle04">Euler Phi</label>
+        <tab-content>
+            <p>Primality Test</p>
+            <p>Check if input is prime or not</p>
+            <p><textarea type="text" value="2" id="isPrimeTest" ></textarea> <button onclick="testPrimality()">check</button></p>
+            <p style="max-width: 600px;word-wrap: break-word;" id="primalityTestResult" ></p>
+        </tab-content>
+        <tab-content>
+            <p>Find Next Prime</p>
+            <p><textarea type="text" value="2" id="nextPrimeTest"  ></textarea> <button onclick="findNextPrime()">check</button></p>
+            <p style="max-width: 600px;word-wrap: break-word;" id="nextPrimeTestResult" ></p>
+        </tab-content>
+        <tab-content>
+            <p>Prime Counting</p>
+            <p>Soon.</p>
+        </tab-content>
+        <tab-content>
+            <p>Euler Phi</p>
+            <p>Soon.</p>
+        </tab-content>
+    </tab-container>
 </div>
 
+<script src="main.js" ></script>
+<script>
+    function testPrimality() {
+        let n = document.getElementById('isPrimeTest').value;
+
+        if (n == "") {
+            document.getElementById("primalityTestResult").innerHTML = `Please enter valid integer.`
+            return;
+        }
+
+        try {
+            let res = isPrime(n);
+            if (res) {
+                document.getElementById("primalityTestResult").innerHTML = `${n} is prime!`
+            } else {
+                document.getElementById("primalityTestResult").innerHTML = `${n} is not prime!`
+            }
+        } catch (e) {
+            document.getElementById("primalityTestResult").innerHTML = `Please enter valid integer.`
+        }
+
+    }
+
+    function findNextPrime() {
+        let n = document.getElementById('nextPrimeTest').value;
+
+        document.getElementById("nextPrimeTestResult").innerHTML = `${nextPrime(n)} is the next prime!`
+    }
+</script>
 </body>
 </html>
 
